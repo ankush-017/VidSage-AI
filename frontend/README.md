@@ -1,16 +1,220 @@
-# React + Vite
+# 🚀 VidSage AI – Chat with YouTube Videos
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+> Turn any YouTube video into an AI-powered assistant using Retrieval-Augmented Generation (RAG)
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## 🧠 Overview
 
-## React Compiler
+VidSage AI allows users to input a YouTube video ID and interact with its content using natural language.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+Instead of watching long videos, users can:
+- 💬 Ask questions
+- ⚡ Get instant answers
+- 🧾 Understand content quickly
 
-## Expanding the ESLint configuration
+The system uses a RAG pipeline to ensure answers are accurate and based only on the video content.
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+---
+
+## ✨ Features
+
+- 🎥 Input any YouTube Video ID  
+- 🧾 Automatic transcript extraction  
+- ✂️ Smart text chunking  
+- 🧠 Semantic search using embeddings  
+- 💬 Chat interface like ChatGPT  
+- 🔒 Answers strictly based on video transcript  
+- ⚡ Fast and relevant responses  
+
+---
+
+## 🏗️ System Architecture
+
+User Input (Video ID)  
+↓  
+Transcript Extraction (YouTube API)  
+↓  
+Convert Transcript → Document  
+↓  
+Text Chunking  
+↓  
+Embeddings Generation  
+↓  
+Store in Vector DB (ChromaDB)  
+↓  
+User Question  
+↓  
+Query Embedding  
+↓  
+Retriever (Top-K Similar Chunks)  
+↓  
+LLM (Gemini)  
+↓  
+Final Answer  
+
+---
+
+## ⚙️ How It Works
+
+### 🔹 Step 1: Indexing (Video Processing)
+
+1. User enters YouTube Video ID  
+2. Backend fetches transcript  
+3. Transcript is converted into a document  
+4. Document is split into smaller chunks  
+5. Each chunk is converted into embeddings  
+6. Stored in ChromaDB  
+
+---
+
+### 🔹 Step 2: Retrieval (Question Answering)
+
+1. User asks a question  
+2. Question is converted into embedding  
+3. Retriever finds most relevant chunks  
+4. Context + Question is sent to LLM  
+5. LLM generates final answer  
+
+---
+
+## 🛠️ Tech Stack
+
+Frontend:
+- React.js  
+- Tailwind CSS  
+- Axios  
+
+Backend:
+- FastAPI  
+- LangChain  
+- ChromaDB  
+
+AI / ML:
+- Google Gemini (LLM)  
+- HuggingFace Embeddings  
+
+---
+
+## 📁 Project Structure
+
+project/
+│
+├── frontend/         # React UI  
+├── backend/          # FastAPI Server  
+│   ├── main.py  
+│   ├── services/  
+│   └── chroma_db/  
+│
+├── .env  
+├── requirements.txt  
+└── README.md  
+
+---
+
+## 🚀 Getting Started
+
+### 1️⃣ Clone Repository
+
+git clone https://github.com/your-username/vidsage-ai.git  
+cd vidsage-ai  
+
+---
+
+### 2️⃣ Backend Setup
+
+cd backend  
+pip install -r requirements.txt  
+
+Create `.env` file:
+
+GOOGLE_API_KEY=your_api_key  
+
+Run backend:
+
+uvicorn main:app --reload  
+
+---
+
+### 3️⃣ Frontend Setup
+
+cd frontend  
+npm install  
+npm run dev  
+
+---
+
+## 🌐 API Endpoints
+
+### 🔹 Process Video
+
+POST /api/process-video  
+
+Body:
+
+{
+  "video_id": "VIDEO_ID"
+}
+
+---
+
+### 🔹 Chat with Video
+
+POST /api/chat  
+
+Body:
+
+{
+  "video_id": "VIDEO_ID",
+  "question": "Your question"
+}
+
+---
+
+## 💡 Example Use Cases
+
+- 📚 Learn from lectures quickly  
+- 🎓 Understand tutorials instantly  
+- 🎙️ Extract insights from podcasts  
+- 🧠 Build AI-powered learning tools  
+
+---
+
+## ⚠️ Limitations
+
+- Transcript must be available  
+- ChromaDB is local (not persistent in cloud)  
+- Accuracy depends on embedding model  
+
+---
+
+## 🚀 Future Improvements
+
+- 🔍 Multi-video search  
+- 🧠 Chat memory  
+- 📌 Timestamp-based answers  
+- ☁️ Cloud vector database  
+- 🎤 Voice input  
+
+---
+
+## 👨‍💻 Author
+
+Ankush Kumar  
+Aspiring Software Engineer  
+Passionate about AI + Full Stack Development  
+
+---
+
+## ⭐ Support
+
+If you like this project:
+
+Give it a ⭐ on GitHub  
+Share with others  
+
+---
+
+## 🔥 Tagline
+
+"Turn any YouTube video into an AI-powered knowledge assistant"
